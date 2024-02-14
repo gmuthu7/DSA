@@ -5,10 +5,8 @@ class Solution(object):
         :type t: str
         :rtype: bool
         """
-        if len(t) < len(s):
-            w = s
-            s = t
-            t = w
+        if len(t) != len(s):
+            return False
         a = [0]*26
         distinct = 0
         for c in s:
