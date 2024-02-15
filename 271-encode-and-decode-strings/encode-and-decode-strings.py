@@ -30,7 +30,10 @@ class Codec:
         i = 0
         st = ""
         while i < len(s):
-            d = s[i:i+2]
+            if i != len(s) - 1:
+                d = s[i] + s[i+1]
+            else:
+                d = s[i]
             if d == "::":
                 i+=2
                 st+=":"
