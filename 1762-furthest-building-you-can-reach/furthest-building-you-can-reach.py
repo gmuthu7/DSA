@@ -1,20 +1,29 @@
-class Solution:
+import heapq
+class Solution(object):
+        
     def furthestBuilding(self, heights, bricks, ladders):
-        ladder_allocations = [] # We'll use heapq to treat this as a min-heap.
-        for i in range(len(heights) - 1):
-            climb = heights[i + 1] - heights[i]
-            # If this is actually a "jump down", skip it.
-            if climb <= 0:
+        """
+        :type heights: List[int]
+        :type bricks: int
+        :type ladders: int
+        :rtype: int
+        """
+        heap = []
+        for idx in range(1,len(heights)):
+            diff = heights[idx] - heights[idx-1]
+            if diff <= 0:
                 continue
-            # Otherwise, allocate a ladder for this climb.
-            heapq.heappush(ladder_allocations, climb)
-            # If we haven't gone over the number of ladders, nothing else to do.
-            if len(ladder_allocations) <= ladders:
+            if len(heap) < ladders:
+                heapq.heappush(heap,diff)
                 continue
-            # Otherwise, we will need to take a climb out of ladder_allocations
-            bricks -= heapq.heappop(ladder_allocations)
-            # If this caused bricks to go negative, we can't get to i + 1
+            smallest = heapq.heappushpop(heap,diff)
+            bricks -= smallest
             if bricks < 0:
-                return i
-        # If we got to here, this means we had enough to cover every climb.
+                return idx -1         
+            
         return len(heights) - 1
+
+
+            
+
+        
