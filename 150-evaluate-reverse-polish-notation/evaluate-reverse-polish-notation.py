@@ -4,20 +4,18 @@ class Solution(object):
         :type tokens: List[str]
         :rtype: int
         """
-        operations = {
-            "+": lambda a, b: a + b,
-            "-": lambda a, b: a - b,
-            "/": lambda a, b: int(a / float(b)),
-            "*": lambda a, b: a * b
-        }
-        
         stack = []
+        ops = {
+            "*": lambda a,b : a*b,
+            "/": lambda a,b: int(a/float(b)),
+            "-": lambda a,b: a-b,
+            "+": lambda a,b: a+b
+        }
         for token in tokens:
-            if token in operations:
-                number_2 = stack.pop()
-                number_1 = stack.pop()
-                operation = operations[token]
-                stack.append(operation(number_1, number_2))
+            if token in ops:
+                op1 = stack.pop()
+                op2 = stack.pop()
+                stack.append(ops[token](op2,op1))
             else:
                 stack.append(int(token))
         return stack.pop()
