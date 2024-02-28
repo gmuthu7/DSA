@@ -20,7 +20,7 @@ class Solution(object):
             elif l[1] == r[1]:
                 return l
             else:
-                return max([l,r],key=lambda x: x[1])
+                return max(l,r,key=lambda x: x[1])
         return fn(root,0)[0]
 
 
