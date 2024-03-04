@@ -23,7 +23,7 @@ class Solution(object):
                 score-=1
                 right-=1
             else:
-                left+=1
+                return score
         return max_score
 
         
