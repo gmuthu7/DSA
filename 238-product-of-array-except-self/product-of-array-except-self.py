@@ -4,15 +4,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        prefix = [0]*len(nums)
+        res = [0]*len(nums)
+        prefix = 1
         for idx,num in enumerate(nums):
-            prefix[idx] = (prefix[idx-1] if idx - 1 >= 0 else 1) *num
-        suffix = 1
-        for pos in range(len(nums)-1,-1,-1):
-            num = nums[pos]
-            nums[pos] = (prefix[pos-1] if pos - 1 >= 0 else 1)*suffix
-            suffix = suffix * num
-        return nums
+            prefix *= num
+            res[idx] = prefix
+        postfix = 1
+        for idx in range(len(nums)-1,-1,-1):
+            num = nums[idx]
+            res[idx] = (res[idx-1] if idx>=1 else 1) *postfix
+            postfix *= num
+        return res
+            
+        
             
 
             
