@@ -15,7 +15,7 @@ class Solution(object):
             return []
         queue.append(root)
         res = []
-        while len(queue) > 0:
+        while queue:
             res.append(queue[-1].val)
             for _ in range(len(queue)):
                 node = queue.popleft()
